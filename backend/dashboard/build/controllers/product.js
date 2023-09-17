@@ -55,7 +55,7 @@ exports.getProductById = (0, catchAsync_1.catchAsync)((req, res, next) => __awai
         data: getProduct,
     });
 }));
-const deleteProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteProduct = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const deletedProduct = yield product_1.default.findByIdAndDelete(req.params.id);
     if (!deletedProduct) {
         return next(new AppError_1.default("id doesn't exist", 404));
@@ -72,8 +72,7 @@ const deleteProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         status: "success",
         data: deletedProduct,
     });
-});
-exports.deleteProduct = deleteProduct;
+}));
 // res : PATCH
 // return : update product by id
 exports.UpdateProduct = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {

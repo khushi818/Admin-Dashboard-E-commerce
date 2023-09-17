@@ -4,11 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const adminAccount_1 = require("../controllers/AdminControllers/adminAccount");
 const authAdmin_1 = require("../controllers/AdminControllers/authAdmin");
 const router = express_1.default.Router();
-router.route("/super/signup").post(authAdmin_1.super_admin_signUp);
-router.route("/signin").post(authAdmin_1.admin_login);
-router.route("/forgotPassword").post(authAdmin_1.ForgotPassword);
-router.route("/resetPassword/:token").patch(authAdmin_1.ResetPassword);
-router.route("/signout").post(authAdmin_1.admin_signout);
+router.route("/profile/data").get(authAdmin_1.isAuthenticated, 
+// authoriseSuperuser as RequestHandler,
+(0, authAdmin_1.authoriseRole)("admin", "superadmin"), adminAccount_1.get_profile_data_admin);
 exports.default = router;

@@ -17,6 +17,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const AppError_1 = __importDefault(require("../../utils/AppError"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const validator = require("validator");
+const crypto_1 = __importDefault(require("crypto"));
 // const distributedRoles = new mongoose.Schema<Ipermission>({
 //   distributedRoles: {
 //     type: String,
@@ -42,6 +43,7 @@ exports.adminSchema = new mongoose_1.default.Schema({
         type: String,
         minlength: 8,
         required: true,
+        select: false,
     },
     passwordConfirm: {
         type: String,
@@ -66,6 +68,8 @@ exports.adminSchema = new mongoose_1.default.Schema({
         type: Array,
         required: true,
     },
+    passwordResetToken: String,
+    passwordTokenExpires: String,
 }, {
     timestamps: true,
 });
@@ -90,6 +94,19 @@ exports.adminSchema.pre("save", function (next) {
 exports.adminSchema.method("correctPassword", function (candidatePassword, originalpassword) {
     return __awaiter(this, void 0, void 0, function* () {
         return yield bcryptjs_1.default.compare(candidatePassword, originalpassword);
+    });
+});
+//generate reset password
+exports.adminSchema.method("createResetToken", function () {
+    return __awaiter(this, void 0, void 0, function* () {
+        const resetToken = crypto_1.default.randomBytes(32).toString("hex");
+        this.passwordResetPassword = crypto_1.default
+            .createHash("sha256")
+            .update(resetToken)
+            .digest("hex");
+        console.log(this.passwordResetPassword);
+        this.passwordTokenExpires = Date.now() + 10 * 60 * 1000;
+        return resetToken;
     });
 });
 const Admin = mongoose_1.default.model("Admin", exports.adminSchema);
