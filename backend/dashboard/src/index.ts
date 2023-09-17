@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response,NextFunction } from "express";
 import ProductRoute from "./routes/product";
 import authRoute from "./routes/auth";
 import adminRoute from "./routes/admin";
@@ -28,7 +28,7 @@ app.use("/api/v1/product", ProductRoute);
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/admin", adminRoute);
 
-app.all("*", (req, res, next) => {
+app.all("*", (req: Request, res: Response, next: NextFunction) => {
   next(new AppError(`cant find the route ${req.originalUrl}`, 404));
 });
 
