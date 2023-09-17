@@ -1,12 +1,12 @@
-import express, { Request, Response,NextFunction } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import ProductRoute from "./routes/product";
 import authRoute from "./routes/auth";
 import adminRoute from "./routes/admin";
 import { v2 as cloudinary } from "cloudinary";
 import AppError from "./utils/AppError";
 import globalHandler from "./controllers/errorController";
-import cookies from 'cookie-parser'
-import cors from 'cors'
+import cookies from "cookie-parser";
+import cors from "cors";
 const app = express();
 
 app.use(express.json());
