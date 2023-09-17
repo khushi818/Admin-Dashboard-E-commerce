@@ -19,7 +19,7 @@ export interface Iadmin {
   role: string;
   permission: any;
   passwordResetToken: string | undefined;
-  passwordTokenExpires: string | undefined;
+  passwordTokenExpires: number | undefined;
 }
 
 export interface IadminDocument extends Iadmin, Document {
@@ -84,7 +84,7 @@ export const adminSchema = new mongoose.Schema<IadminDocument>(
       required: true,
     },
     passwordResetToken: String,
-    passwordTokenExpires: String,
+    passwordTokenExpires: Number,
   },
   {
     timestamps: true,
@@ -120,12 +120,12 @@ adminSchema.method(
 //generate reset password
 adminSchema.method("createResetToken", async function () {
   const resetToken = crypto.randomBytes(32).toString("hex");
-  this.passwordResetPassword = crypto
+  this.passwordResetToken = crypto
     .createHash("sha256")
     .update(resetToken)
     .digest("hex");
 
-  console.log(this.passwordResetPassword);
+  console.log(this.passwordResetToken);
   this.passwordTokenExpires = Date.now() + 10 * 60 * 1000;
 
   return resetToken;
