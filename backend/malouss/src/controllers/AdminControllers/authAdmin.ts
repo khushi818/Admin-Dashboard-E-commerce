@@ -152,7 +152,7 @@ export const isAuthenticated = catchAsync(
     const currentUser: any = await Admin.findOne({ _id: decoded.id });
 
     if (!currentUser) {
-      return next(new Admin("admin does not exist", 401));
+      return next(new AppError("admin does not exist", 401));
     }
 
     req.auth = currentUser;

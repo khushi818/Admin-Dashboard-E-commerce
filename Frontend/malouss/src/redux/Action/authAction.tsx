@@ -7,7 +7,7 @@ type auth = {
 };
 
 export const loginAdmin = createAsyncThunk(
-  "auth/Register",
+  "auth/login",
   async (authData: auth, { rejectWithValue }) => {
     try {
       const config = {

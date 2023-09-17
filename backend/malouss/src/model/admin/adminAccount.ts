@@ -3,6 +3,7 @@ import AppError from "../../utils/AppError";
 import bcrypt from "bcryptjs";
 const validator = require("validator");
 import crypto from "crypto";
+
 // export interface Ipermission {
 //   distributedRoles: string;
 // }
@@ -123,6 +124,7 @@ adminSchema.method("createResetToken", async function () {
     .createHash("sha256")
     .update(resetToken)
     .digest("hex");
+
   console.log(this.passwordResetPassword);
   this.passwordTokenExpires = Date.now() + 10 * 60 * 1000;
 

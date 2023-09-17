@@ -69,20 +69,7 @@ const Products = () => {
 
     setProductData([...product.data.data]);
     console.log("data==>", product.data.data);
-    // product.data.data.forEach((product) => {
-    //   console.log(product._id);
-    //   const data = {
-    //     Image: product.productImage?.url,
-    //     id: product._id,
-    //     ProductName: product.productName,
-    //     createdAt: product.createdAt,
-    //     secondHand: product.secondhand,
-    //   };
-
-    //   rows = [...rows, data];
-    // });
     console.log(rows);
-    // return data;
     console.log("data=>", productData);
   };
 
@@ -113,10 +100,6 @@ const Products = () => {
           >
             Products
           </Typography>
-          {/* <SearchBar
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-          /> */}
         </Stack>
         <Box sx={{ height: 400, width: "100%", marginTop: "25px" }}>
           <DataGrid

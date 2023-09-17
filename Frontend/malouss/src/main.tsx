@@ -6,16 +6,19 @@ import { BrowserRouter } from "react-router-dom";
 import MuiTheme from "../MuiTheme.ts";
 import { ThemeProvider } from "@emotion/react";
 import { Provider } from "react-redux";
-import { store } from "./redux/store/store.tsx";
+import { persistor, store } from "./redux/store/store.tsx";
+import { PersistGate } from "redux-persist/integration/react";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={MuiTheme}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ThemeProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider theme={MuiTheme}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ThemeProvider>
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

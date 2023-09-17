@@ -23,7 +23,6 @@ export const createProduct = catchAsync(
         public_id: result.public_id,
         url: result.secure_url,
       },
-
       ...req.body,
     });
 
