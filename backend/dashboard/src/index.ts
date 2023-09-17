@@ -5,8 +5,8 @@ import adminRoute from "./routes/admin";
 import { v2 as cloudinary } from "cloudinary";
 import AppError from "./utils/AppError";
 import globalHandler from "./controllers/errorController";
-const cookies = require("cookie-parser");
-const cors = require("cors");
+import cookies from 'cookie-parser'
+import cors from 'cors'
 const app = express();
 
 app.use(express.json());
