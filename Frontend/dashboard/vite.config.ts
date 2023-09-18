@@ -9,12 +9,10 @@ export default defineConfig({
   server: {
     proxy: {
       "/api/v1": {
-        target: isDev
-          ? "http://localhost:8000"
-          : "https://admin-dashboard-0hge.onrender.com",
-        changeOrigin: isDev,
-        secure: !isDev,
-        ws: isDev,
+        target: "https://admin-dashboard-0hge.onrender.com",
+        changeOrigin: false,
+        secure: true,
+        // ws: isDev,
       },
     },
   },

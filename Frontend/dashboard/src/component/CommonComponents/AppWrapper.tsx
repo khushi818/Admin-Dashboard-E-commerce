@@ -17,6 +17,7 @@ const AppWrapper = ({ children }: AppProp) => {
         justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
+        position: "relative",
       }}
     >
       {children}
