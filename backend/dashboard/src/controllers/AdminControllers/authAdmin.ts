@@ -43,6 +43,36 @@ export const super_admin_signUp = catchAsync(
   }
 );
 
+export const add_admin = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { permission } = req.body;
+    const newAdmin = await Admin.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      password: req.body.password,
+      passwordConfirm: req.body.passwordConfirm,
+      email: req.body.email,
+      contactNumber: req.body.contactNumber,
+      role: req.body.role,
+      permission,
+    });
+
+    const token: any = sendJwtToken(newAdmin._id);
+
+    const expire_cookie: any = process.env.JWT_COOKIE_EXPIRES_IN;
+
+    const cookieOptions: any = storeCookie(expire_cookie);
+
+    res.cookie("jwt", token, cookieOptions);
+
+    console.log(res.cookie);
+    res.status(200).json({
+      status: "success",
+      token,
+    });
+  }
+);
+
 export const admin_login = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
