@@ -58,23 +58,19 @@ const columns: any = [
   },
 ];
 
-let rows: any = [];
-
 const Products = () => {
   const navigate = useNavigate();
   const [productData, setProductData] = useState<product[]>([]);
   const getProducts = async () => {
     const product = await axios.get<GetResponse>("api/v1/product");
-    setProductData({ ...product.data.data });
-    console.log("data==>", product);
-    console.log(rows);
-    console.log("data=>", productData);
+    setProductData([...product.data.data]);
   };
 
   useEffect(() => {
     getProducts();
   }, []);
 
+  console.log("data=>", productData);
   return (
     <>
       <Box>

@@ -9,6 +9,7 @@ import CreateProduct from "./Pages/Product/CreateProduct";
 import AddAdmin from "./Pages/AuthComponent/AddAdmin";
 import { useAppSelector } from "./redux/app/hook";
 import { RootState } from "./redux/store/store";
+import Dashboard from "./Pages/Dashboard";
 
 function App() {
   const { isAuthentication } = useAppSelector((state: RootState) => {
@@ -21,7 +22,7 @@ function App() {
       <Routes>
         {isAuthentication ? (
           <Route path="/" element={<TopNavBar />}>
-            <Route index element={<h3>Dashboard</h3>} />
+            <Route index element={<Dashboard />} />
             <Route path="/products" element={<Products />}></Route>
             <Route path="/createproduct" element={<CreateProduct />}></Route>
             <Route path="/addadmin" element={<AddAdmin />}></Route>

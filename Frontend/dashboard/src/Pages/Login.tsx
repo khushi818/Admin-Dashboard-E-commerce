@@ -83,8 +83,11 @@ const Login = () => {
           textDecoration: "underline",
           cursor: "pointer",
         }}
+        onClick={() => {
+          formik.setValues({ email: "khushi@gmail.com", password: "12345678" });
+        }}
       >
-        forgot password?
+        please choose shortcut
       </Typography>
       <Button
         color="primary"

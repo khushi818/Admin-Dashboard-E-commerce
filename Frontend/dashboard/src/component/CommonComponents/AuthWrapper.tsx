@@ -10,19 +10,23 @@ const AuthWrapper = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          flexDirection: "column",
+          overflow: "hidden",
         }}
       >
         <Box
           component="img"
+          display={{ large: "none" }}
           sx={{
-            width: "100%",
+            width: "200px",
           }}
           alt="frontpage"
           src="/frontpage.PNG"
-        ></Box>
+        />
         <Card
           sx={{
-            width: "700px",
+            maxWidth: "500px",
+            width: "100%",
             padding: "40px",
             margin: "20px",
           }}
