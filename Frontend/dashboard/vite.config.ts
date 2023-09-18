@@ -6,13 +6,14 @@ const isDev = process.env.NODE_ENV === "development";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: "https://admin-dashboard-0hge.onrender.com",
   server: {
     proxy: {
       "/api/v1": {
         target: "https://admin-dashboard-0hge.onrender.com",
         changeOrigin: false,
         secure: true,
-        // ws: isDev,
+        ws: true,
       },
     },
   },
