@@ -14,7 +14,7 @@ export default defineConfig({
           : "https://admin-dashboard-0hge.onrender.com",
         changeOrigin: isDev,
         secure: !isDev,
-        ws: true,
+        ws: isDev,
       },
     },
   },
