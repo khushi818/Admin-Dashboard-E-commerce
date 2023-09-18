@@ -12,6 +12,8 @@ import {
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useState } from "react";
+import axios from "axios";
+import { BASE_URL } from "../../url";
 
 const validationSchema = yup.object({
   email: yup.string().email().required(),
@@ -28,23 +30,10 @@ const validationSchema = yup.object({
     ),
   firstName: yup.string(),
   lastName: yup.string(),
+  contactNumber: yup.number(),
 });
 
 const AddAdmin = () => {
-  const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      contactNumber: null,
-    },
-    validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
-
   const [permissions, setPermissions] = useState<{
     user: boolean;
     order: boolean;
@@ -55,13 +44,40 @@ const AddAdmin = () => {
     product: false,
   });
 
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+      contactNumber: null,
+    },
+    validationSchema,
+    onSubmit: async (values) => {
+      alert(JSON.stringify(values, null, 2));
+
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      await axios
+        .post(
+          `${BASE_URL}/api/v1/auth/super/createadmin`,
+          { ...values, permissions },
+          config
+        )
+        .then(() => console.log("success"));
+    },
+  });
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPermissions({
       ...permissions,
       [event.target.name]: event.target.checked,
     });
   };
-  console.log(permissions);
 
   const { user, order, product } = permissions;
 
@@ -133,6 +149,23 @@ const AddAdmin = () => {
           onBlur={formik.handleBlur}
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
+        />
+
+        <TextField
+          required
+          fullWidth
+          id="passwordConfirm"
+          name="passwordConfirm"
+          label="passwordConfirm"
+          type="passwordConfirm"
+          value={formik.values.passwordConfirm}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={
+            formik.touched.passwordConfirm &&
+            Boolean(formik.errors.passwordConfirm)
+          }
+          helperText={formik.touched.password && formik.errors.passwordConfirm}
         />
 
         <TextField
