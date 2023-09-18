@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../../url";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 type auth = {
@@ -17,7 +18,7 @@ export const loginAdmin = createAsyncThunk(
       };
       console.log(authData);
       const { data } = await axios.post(
-        "/api/v1/auth/signin",
+        `${BASE_URL}/api/v1/auth/signin`,
         authData,
         config
       );
@@ -42,7 +43,7 @@ export const signoutAdmin = createAsyncThunk(
           "Content-type": "application/json",
         },
       };
-      await axios.post("/api/v1/auth/signout", config);
+      await axios.post(`${BASE_URL}/api/v1/auth/signout`, config);
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);

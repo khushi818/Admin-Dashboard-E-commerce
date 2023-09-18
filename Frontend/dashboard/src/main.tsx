@@ -8,9 +8,9 @@ import { ThemeProvider } from "@emotion/react";
 import { Provider } from "react-redux";
 import { persistor, store } from "./redux/store/store.tsx";
 import { PersistGate } from "redux-persist/integration/react";
-import { disableReactDevTools } from "@fvilers/disable-react-devtools"
+import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 
-if(process.env.NODE_ENV === "production") disableReactDevTools()
+if (process.env.NODE_ENV === "production") disableReactDevTools();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
