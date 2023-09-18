@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import TopNavBar from "./component/layoutComponent/TopNavBar";
 import Products from "./Pages/Product/Products";
 import CreateProduct from "./Pages/Product/CreateProduct";
-import AddAdmin from "./Pages/Product/AuthComponent/AddAdmin";
+import AddAdmin from "./Pages/AuthComponent/AddAdmin";
 import { useAppSelector } from "./redux/app/hook";
 import { RootState } from "./redux/store/store";
 

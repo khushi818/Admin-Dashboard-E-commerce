@@ -7,7 +7,6 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -19,7 +18,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import { useNavigate } from "react-router-dom";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { signoutAdmin } from "../../redux/Action/authAction";
 import { useAppDispatch } from "../../redux/app/hook";
 
@@ -125,8 +124,22 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Stack>
-            {/* <Box component="div">Ma louss</Box> */}
+          <Stack
+            display={"flex"}
+            direction={"row"}
+            justifyContent={"space-between"}
+            width={"100%"}
+            alignItems={"center"}
+          >
+            <Box
+              component="div"
+              sx={{
+                fontWeight: 700,
+                fontSize: "24px",
+              }}
+            >
+              Dashboard
+            </Box>
             <Box
               component="div"
               sx={{
@@ -155,12 +168,22 @@ export default function MiniDrawer() {
           </IconButton>
         </DrawerHeader>
         <Divider />
+
         <List>
           {[
             { val: "admin", loc: "/addadmin" },
             { val: "products", loc: "/products" },
           ].map((list, index) => (
-            <ListItem key={index} disablePadding sx={{ display: "block" }}>
+            <ListItem
+              key={index}
+              disablePadding
+              sx={{
+                display: "block",
+                color: "#0d507d",
+                fontSize: "16px",
+                fontWeight: "600",
+              }}
+            >
               <ListItemButton
                 sx={{
                   minHeight: 48,

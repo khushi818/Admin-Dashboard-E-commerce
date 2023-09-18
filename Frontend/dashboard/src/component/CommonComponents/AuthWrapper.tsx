@@ -1,34 +1,36 @@
 import { Outlet } from "react-router-dom";
-import { Stack, Paper } from "@mui/material";
+import { Box, Card } from "@mui/material";
 import AppWrapper from "./AppWrapper";
 
 const AuthWrapper = () => {
   return (
     <AppWrapper>
-      <Stack
-        justifyContent={"center"}
-        alignItems={"center"}
+      <Box
         sx={{
-          minHeight: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        {/* form container */}
-        <Paper
-          elevation={18}
+        <Box
+          component="img"
           sx={{
-            boxSizing: "border-box",
-            borderRadius: "20px",
-            width: "95%",
-            maxWidth: "460px",
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            padding: { xs: "20px", sm: "30px" },
+            width: "100%",
+          }}
+          alt="frontpage"
+          src="/frontpage.PNG"
+        ></Box>
+        <Card
+          sx={{
+            width: "700px",
+            padding: "40px",
+            margin: "20px",
           }}
         >
           <Outlet />
-          {/* form container */}
-        </Paper>
-      </Stack>
+        </Card>
+      </Box>
+      {/* form container */}
     </AppWrapper>
   );
 };

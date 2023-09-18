@@ -11,9 +11,10 @@ const AppWrapper = ({ children }: AppProp) => {
       sx={{
         width: "100%",
         maxWidth: "1440px",
-        height: "100%",
+        height: "100vh",
         boxSizing: "border-box",
         display: "flex",
+        justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
       }}

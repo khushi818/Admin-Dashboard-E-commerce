@@ -1,4 +1,4 @@
-import { Stack, TextField, Typography, Button, Box } from "@mui/material";
+import { TextField, Typography, Button, Box, Card } from "@mui/material";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { loginAdmin } from "../redux/Action/authAction";
@@ -40,16 +40,16 @@ const Login = () => {
 
   return (
     <Box
+      width="100%"
       component="form"
       display="flex"
-      gap="20px"
       flexDirection="column"
-      width={"700px"}
       onSubmit={formik.handleSubmit}
     >
       <Typography
         variant="h4"
         style={{
+          textAlign: "center",
           color: "#0d507d",
         }}
       >
@@ -79,19 +79,28 @@ const Login = () => {
         helperText={formik.touched.password && formik.errors.password}
       />
 
-      <Stack
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"center"}
-      ></Stack>
+      <Typography
+        variant="body2"
+        sx={{
+          textAlign: "right",
+          color: "#0d507d",
+          textDecoration: "underline",
+          cursor: "pointer",
+        }}
+      >
+        forgot password?
+      </Typography>
       <Button
         color="primary"
         variant="contained"
         fullWidth
         type="submit"
         onClick={() => navigate("/")}
+        sx={{
+          marginTop: "10px",
+        }}
       >
-        Submit
+        Login
       </Button>
     </Box>
   );
