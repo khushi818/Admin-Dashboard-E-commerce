@@ -1,6 +1,6 @@
-import mongoose, { Error } from "mongoose";
 import dotenv from "dotenv";
-dotenv.config({ path: "./config.env" });
+dotenv.config();
+import mongoose, { Error } from "mongoose";
 import app from "./index";
 
 const DB: string = (process.env.MONGO_URI as string).replace(
