@@ -14,10 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookies());
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173/",
-      "https://admin-dashboard-e-commerce.vercel.app/",
-    ],
+    origin: "*",
   })
 );
 
