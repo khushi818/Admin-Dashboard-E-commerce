@@ -1,7 +1,11 @@
 import { Stack, TextField, Button, Box, Typography } from "@mui/material";
+import { BASE_URL } from "../../url";
 import { useFormik } from "formik";
+import axios from "axios";
+import { useState } from "react";
 
 const CreateProduct = () => {
+  const [productImage, setProductImage] = useState<any>(null);
   const formik = useFormik({
     initialValues: {
       productName: "",
@@ -11,10 +15,19 @@ const CreateProduct = () => {
       productScndPrice: null,
       productCategory: "",
       productStock: null,
-      productImage: "",
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       alert(JSON.stringify(values, null, 2));
+      console.log(values);
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      await axios
+        .post(`${BASE_URL}/api/v1/product`, { ...values, productImage }, config)
+        .then(() => console.log("success"));
     },
   });
 
@@ -43,7 +56,7 @@ const CreateProduct = () => {
         >
           <Box
             component={"img"}
-            src={formik.values.productImage}
+            src={productImage}
             sx={{
               marginInline: "auto",
               width: "300px",
@@ -56,12 +69,12 @@ const CreateProduct = () => {
             id="productImage"
             name="productImage"
             type="file"
-            onChange={(e: any) =>
-              formik.setValues({
-                ...formik.values,
-                productImage: URL.createObjectURL(e.target.files[0]),
-              })
-            }
+            onChange={(e: any) => {
+              // let formdata = new FormData();
+              // formdata.append("productImage", e.target.files);
+              // setProductImage(formdata);
+              setProductImage(URL.createObjectURL(e.target.files));
+            }}
           />
         </Box>
         <TextField
@@ -175,7 +188,7 @@ const CreateProduct = () => {
           name="productStock"
           label="productStock"
           type="number"
-          value={formik.values.productCategory}
+          value={formik.values.productStock}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={

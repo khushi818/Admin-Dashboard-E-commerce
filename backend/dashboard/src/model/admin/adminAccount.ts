@@ -16,7 +16,7 @@ export interface Iadmin {
   passwordConfirm: string | undefined;
   email: string;
   contactNumber?: number;
-  role: string;
+  role?: string;
   permission: any;
   passwordResetToken: string | undefined;
   passwordTokenExpires: number | undefined;
@@ -76,7 +76,7 @@ export const adminSchema = new mongoose.Schema<IadminDocument>(
     },
     role: {
       type: String,
-      required: true,
+      default: "admin",
       enum: ["admin", "superadmin", "user"],
     },
     permission: {
