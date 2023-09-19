@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Stack, Typography, Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import axios from "axios";
+import { BASE_URL } from "../../url";
 
 type product = {
   _id(_id: any): unknown;
@@ -62,7 +63,7 @@ const Products = () => {
   const navigate = useNavigate();
   const [productData, setProductData] = useState<product[]>([]);
   const getProducts = async () => {
-    const product = await axios.get<GetResponse>("api/v1/product");
+    const product = await axios.get<GetResponse>(`${BASE_URL}/api/v1/product`);
     setProductData([...product.data.data]);
   };
 

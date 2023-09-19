@@ -13,6 +13,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { useState } from "react";
 import axios from "axios";
+import { BASE_URL } from "../../url";
 
 const validationSchema = yup.object({
   email: yup.string().email().required(),
@@ -62,7 +63,11 @@ const AddAdmin = () => {
         },
       };
       await axios
-        .post(`/auth/super/createadmin`, { ...values, permissions }, config)
+        .post(
+          `${BASE_URL}/api/v1/auth/super/createadmin`,
+          { ...values, permissions },
+          config
+        )
         .then(() => console.log("success"));
     },
   });

@@ -72,15 +72,14 @@ const CreateProduct = () => {
           alignItems={"left"}
           flexDirection={"column"}
         >
-          {/* <Box
+          <Box
             component={"img"}
             src={productImage ? URL.createObjectURL(productImage) : ""}
             sx={{
-              marginInline: "auto",
-              width: "300px",
-              borderRadius: "100%",
+              marginBlock: "20px",
+              width: "100px",
             }}
-          /> */}
+          />
           <input
             required
             id="productImage"
