@@ -19,18 +19,30 @@ const CreateProduct = () => {
     onSubmit: async (values) => {
       alert(JSON.stringify(values, null, 2));
       console.log(values);
+      const formdata = new FormData();
+      let key: any;
+      const val: any = { ...values };
+      for (key in val) {
+        formdata.append(key, val[key]);
+      }
+      formdata.append("productImage", productImage);
+
       const config = {
         headers: {
-          "Content-type": "application/json",
+          "Content-type": "multipart/form-data",
+          // headers: { "Content-Type": "multipart/form-data" },
         },
+        transformRequest: (formData: any) => formData,
       };
 
+      // console.log(formdata);
       await axios
-        .post(`${BASE_URL}/api/v1/product`, { ...values, productImage }, config)
+        .post(`${BASE_URL}/api/v1/product`, formdata, config)
         .then(() => console.log("success"));
     },
   });
 
+  console.log(productImage);
   return (
     <Stack
       justifyContent={"center"}
@@ -47,33 +59,36 @@ const CreateProduct = () => {
       >
         CREATE PRODUCT
       </Typography>
-      <Box component="form" onSubmit={formik.handleSubmit}>
+      <Box
+        component="form"
+        onSubmit={formik.handleSubmit}
+        method="post"
+        action="/upload"
+        encType="multipart/form-data"
+      >
         <Box
           display={"flex"}
           justifyContent={"space-between"}
           alignItems={"left"}
           flexDirection={"column"}
         >
-          <Box
+          {/* <Box
             component={"img"}
-            src={productImage}
+            src={productImage ? URL.createObjectURL(productImage) : ""}
             sx={{
               marginInline: "auto",
               width: "300px",
               borderRadius: "100%",
             }}
-          />
-          <TextField
+          /> */}
+          <input
             required
-            label={"productImage"}
             id="productImage"
             name="productImage"
+            accept=".png, .jpg, .jpeg"
             type="file"
             onChange={(e: any) => {
-              // let formdata = new FormData();
-              // formdata.append("productImage", e.target.files);
-              // setProductImage(formdata);
-              setProductImage(URL.createObjectURL(e.target.files));
+              setProductImage(e.target.files[0]);
             }}
           />
         </Box>

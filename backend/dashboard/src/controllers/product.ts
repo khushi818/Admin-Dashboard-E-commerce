@@ -10,12 +10,11 @@ import AppError from "../utils/AppError";
 export const createProduct = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const file = req.file;
+    console.log(file);
     const fileUri = getDataUri(file);
 
     const result: any = await cloudinary.v2.uploader.upload(fileUri.content, {
       folder: "products",
-      width: 300,
-      crop: "scale",
     });
 
     const products = await Product.create({
